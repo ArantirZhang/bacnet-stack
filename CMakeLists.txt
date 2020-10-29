@@ -59,6 +59,12 @@ option(
   "compile without datalink"
   OFF)
 
+option(
+  BACDL_TEST
+  "copile testcases"
+  OFF)
+
+
 set(BACNET_PROTOCOL_REVISION 19)
 
 #
@@ -446,6 +452,7 @@ add_library(
 # add tests
 #
 
+if (BACDL_TEST)
 list(APPEND testdirs
   test/bacnet/abort
   test/bacnet/alarm_ack
@@ -545,7 +552,7 @@ foreach(testdir IN ITEMS ${testdirs})
   set_tests_properties(test_${basename}  PROPERTIES FIXTURES_REQUIRED test_fixture)
   set_tests_properties(build_${basename} PROPERTIES FIXTURES_SETUP    test_fixture)
 endforeach()
-
+endif(BACDL_TEST)
 #
 # add ports
 #
